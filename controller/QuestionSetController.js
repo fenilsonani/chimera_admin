@@ -2,12 +2,24 @@
 const QuestionSet = require('../models/QuestionSet');
 const Question = require('../models/Question');
 
-const viewContactSet = (req, res) => {
+const viewContactSetForm = (req, res) => {
     res.render('QuestionSet', {
         title: 'Question Set',
     });
 }
 
+const viewContactSet = async (req, res) => {
+    try {
+        const questionSets = await QuestionSet.find().populate('questions');
+        res.render('ViewQuestionSet', {
+            title: 'View Question Set',
+            questionSets,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 const countQuestionSet = async () => {
     const count = await QuestionSet.countDocuments();
     return count;
@@ -73,4 +85,4 @@ const addContactSet = async (req, res) => {
     }
 }
 
-module.exports = {viewContactSet, addContactSet , countQuestionSet};
+module.exports = {viewContactSetForm, viewContactSet , addContactSet , countQuestionSet};

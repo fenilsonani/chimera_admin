@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">All Question Sets</h1>
+
+{{#each questionSets}}
+    <div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">{{this.name}}</h2>
+    <ul>
+    {{#each this.questions}}
+        <li>
+        {{this.text}}
+        {{#if this.type }}
+                <ul class="list-group mt-2">
+                    {{#each this.options}}
+                        <li class="list-group-item">
+                            {{this.text}}
+                            {{#if this.isCorrect}}
+                                <span class="badge badge-success ml-2">Correct</span>
+                            {{else}}
+                                <span class="badge badge-secondary ml-2">Incorrect</span>
+                            {{/if}}
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+            </li>
+                <li class="list-group-item">
+                    {{#each this.answer}}
+                        {{this.answer}}
+                    {{/each}}
+                </li>
+        {{/each}}
+        </ul>
+        </div>
+        </div>
+    {{/each}}
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+    </html>

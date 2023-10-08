@@ -10,8 +10,10 @@ const customHelpers = require('./helpers/custom-helpers');
 const hbs = require('hbs');
 const path = require('path');
 
+
+
 // Register a Handlebars helper function to increment the index
-// const hbs = exphbs.create({
+// const hbseng = exphbs.create({
 //     extname: 'hbs',
 //     helpers: {
 //         // Define the incrementIndex helper function

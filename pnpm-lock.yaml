@@ -26,6 +26,9 @@ dependencies:
   handlebars:
     specifier: ^4.7.8
     version: 4.7.8
+  handlebars-helper-equal:
+    specifier: ^1.0.0
+    version: 1.0.0
   hbs:
     specifier: ^4.2.0
     version: 4.2.0
@@ -641,6 +644,10 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+    dev: false
+
+  /handlebars-helper-equal@1.0.0:
+    resolution: {integrity: sha512-1qcmnBdq8+fgnonjGmH9HB6pSSkSnD7qVoFVjLwJWdpAlszRvthKHReGQx6oLbsC7yGt5vrHE+wngqC/4t6rQQ==}
     dev: false
 
   /handlebars@4.7.7:
