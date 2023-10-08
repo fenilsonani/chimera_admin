@@ -1,7 +1,12 @@
 const viewDashboard = (req, res) => {
-    res.render('index', {
+    res.render('dashboard', {
         title: 'Dashboard',
     });
 };
 
-module.exports = { viewDashboard };
+const  viewLogin = (req, res) => {
+    res.render('index', {
+        title: 'Login',
+    });
+};
+module.exports = { viewDashboard , viewLogin };
