@@ -8,6 +8,10 @@ const viewContactSet = (req, res) => {
     });
 }
 
+const countQuestionSet = async () => {
+    const count = await QuestionSet.countDocuments();
+    return count;
+}
 const addContactSet = async (req, res) => {
     try {
         const {questionSetName, MultipleChoiceQuestion, question, choice , answer} = req.body;
@@ -69,4 +73,4 @@ const addContactSet = async (req, res) => {
     }
 }
 
-module.exports = {viewContactSet, addContactSet};
+module.exports = {viewContactSet, addContactSet , countQuestionSet};

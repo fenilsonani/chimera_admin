@@ -28,14 +28,16 @@
     <!-- Question Set Name -->
     <div class="form-group">
         <label for="questionSetName">Question Set Name</label>
-        <input type="text" class="form-control" id="questionSetName" name="questionSetName" placeholder="Enter your question set name">
+        <input type="text" class="form-control" id="questionSetName" name="questionSetName"
+               placeholder="Enter your question set name">
     </div>
 
     <!-- Toggle button to switch between multiple choice and single choice -->
     <div id="questionSet">
         <div id="question" class="form-group">
             <label for="questionType">Multiple Choice</label>
-            <input type="text" id="MultipleChoiceQuestion" name="MultipleChoiceQuestion[]"  value="false" hidden="hidden">
+            <input type="text" id="MultipleChoiceQuestion" name="MultipleChoiceQuestion[]" value="false"
+                   hidden="hidden">
             <input type="checkbox" id="MultipleChoiceQuestionCheckBox" name="MultipleChoiceQuestionCheckBox">
 
             <!-- Multiple choice Question -->
@@ -45,7 +47,8 @@
 
             <div id="answerDiv">
                 <label for="answer1">Answer 1</label>
-                <input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">
+                <input type="text" class="form-control answer" id="answer" name="answer[]"
+                       placeholder="Enter your answer">
             </div>
             <!-- Button to remove question -->
             <button type="button" class="btn btn-danger removeQuestion">Remove Question</button>
