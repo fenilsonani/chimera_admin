@@ -9,5 +9,28 @@
 </head>
 <body>
 Dashboard
+
+TotalCandidate :: &nbsp; {{TotalCandidate}} <br>
+All the candidate Data
+<table>
+    <tr>
+<!--        <td>#</td>-->
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <td>Location</td>
+    </tr>
+    {{#each candidates}}
+        <tr>
+<!--            <td>{{ @index }}</td>-->
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>{{this.location}}</td>
+        </tr>
+    {{/each}}
+</table>
 </body>
 </html>

@@ -1,18 +1,33 @@
 const express = require('express');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const port = process.env.PORT | 3000
+const app = express();
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({extended: true}));
+
 const exphbs = require('express-handlebars');
-const mongoose = require('mongoose');
+const customHelpers = require('./helpers/custom-helpers');
 const hbs = require('hbs');
 const path = require('path');
-const User = require("./models/User");
 
-const app = express();
-const port = process.env.PORT |  3000
+// Register a Handlebars helper function to increment the index
+// const hbs = exphbs.create({
+//     extname: 'hbs',
+//     helpers: {
+//         // Define the incrementIndex helper function
+//         incrementIndex: function (value) {
+//             return value + 1;
+//         },
+//     },
+//     allowProtoMethodsByDefault: true,
+//     allowProtoPropertiesByDefault: true
+// });
 
 
 // Set the view engine to use Handlebars (hbs)
+// app.engine('hbs', hbseng.engine);
 app.set('view engine', 'hbs');
+
 
 // Set the views directory to the "views" folder
 app.set('views', path.join(__dirname, 'views'));
@@ -23,38 +38,41 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded({ extended: true }));
 
-// Express session middleware
-
+// Use express-session middleware
 const secretKey = 'abc123';
 app.use(session({
-    secret: secretKey, // Replace with a strong secret key
-    resave: false, // Don't save the session if it hasn't been modified
-    saveUninitialized: true, // Save new sessions
-    cookie: { secure: true }, // Set to true for HTTPS
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true,
+    // store: new MongoStore({mongooseConnection: mongoose.connection}),
 }));
 
-
 // mongoes connect
+const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb://localhost:27017/db_chimera" ,{ family : 4})
-.then(() => {
-    app.listen(port, () => console.log(`app listening on port ${port}!`));
-}).catch((err) => {
+mongoose.connect("mongodb://localhost:27017/db_chimera", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    family: 4
+})
+    .then(() => {
+        app.listen(port, () => console.log(`app listening on port ${port}!`));
+    }).catch((err) => {
     console.log(err);
 })
 
-// user create
-User.createAdmin();
 
 // listen server without mongoes
 // app.listen(port, () => console.log(`app listening on port ${port}!`));
 
 
+// user create
+const User = require("./models/User");
+User.createAdmin();
+
 const routes = require("./router")
-app.use("/" , routes);
+app.use("/", routes);
 app.get('/', (req, res) => res.send('Hello World!'))
 
 

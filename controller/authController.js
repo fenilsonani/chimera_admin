@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
-module.exports = {
+module.exports = exports = {
     async login(req, res) {
         const { username, password } = req.body;
 
@@ -9,10 +9,12 @@ module.exports = {
             const user = await User.findOne({ username });
 
             if (!user || !(await bcrypt.compare(password, user.password))) {
+                // console.log("Invaild Password")
                 return res.redirect('back');
             }
 
             req.session.user = user;
+            // console.log("Login Success");
             res.redirect('dashboard');
         } catch (error) {
             console.error(error);
@@ -33,13 +35,13 @@ module.exports = {
         if (req.session.user) {
             return next();
         }
-        res.redirect('admin/');
+        res.redirect('/admin');
     },
 
     checkNotAuthenticated(req, res, next) {
         if (!req.session.user) {
             return next();
         }
-        res.redirect('admin/dashboard');
+        res.redirect('/admin/dashboard');
     },
 };
