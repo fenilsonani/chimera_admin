@@ -45,12 +45,12 @@
 
             <div id="answerDiv">
                 <label for="answer1">Answer 1</label>
-                <input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">
+                <input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">
             </div>
             <!-- Button to remove question -->
             <button type="button" class="btn btn-danger removeQuestion">Remove Question</button>
+            </div>
         </div>
-    </div>
     </div>
 
     <!-- Button to add new question -->
@@ -67,16 +67,13 @@
             answerDiv.children().remove();
             if ($(this).prop('checked')) {
                 $(this).parent('#question').children('#MultipleChoiceQuestion').val('true');
-                answerDiv.append('<label for="answer1">Choice 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer2">Choice 2</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer3">Choice 3</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer4">Choice 4</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer4">Answer</label><input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer1">Answer 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer2">Answer 2</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer3">Answer 3</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer4">Answer 4</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
             } else {
                 $(this).parent('#question').children('#MultipleChoiceQuestion').val('false');
-                // answerDiv.append('<label for="answer1">Answer 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-
-                answerDiv.append('<label for="answer1">Answer 1</label><input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer1">Answer 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
             }
         });
 
