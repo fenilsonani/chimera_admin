@@ -9,12 +9,35 @@ const viewContactSetForm = (req, res) => {
 }
 
 const viewContactSet = async (req, res) => {
+    // try {
+    //     const questionSets = await QuestionSet.find().populate('questions');
+    //     res.render('ViewQuestionSet', {
+    //         title: 'View Question Set',
+    //         questionSets,
+    //     });
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).send('Internal Server Error');
+    // }
+
     try {
-        const questionSets = await QuestionSet.find().populate('questions');
-        res.render('ViewQuestionSet', {
-            title: 'View Question Set',
-            questionSets,
-        });
+        const questionSets = await QuestionSet.aggregate([
+            {
+                $lookup: {
+                    from: 'questions', // Assuming your questions collection name is 'questions'
+                    localField: 'questions',
+                    foreignField: '_id',
+                    as: 'questions',
+                },
+            },
+            {
+                $addFields: {
+                    totalQuestions: {$size: '$questions'}, // Calculate the total number of questions
+                },
+            },
+        ]);
+
+        res.render('ViewQuestionSet', {title: 'View Question Set', questionSets});
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -26,7 +49,7 @@ const countQuestionSet = async () => {
 }
 const addContactSet = async (req, res) => {
     try {
-        const {questionSetName, MultipleChoiceQuestion, question, choice , answer} = req.body;
+        const {questionSetName, MultipleChoiceQuestion, question, choice, answer} = req.body;
 
         const questionSet = new QuestionSet({
             name: questionSetName,
@@ -56,7 +79,7 @@ const addContactSet = async (req, res) => {
                     newQuestion.options.push({
                         text: choice[i * 4 + j],
                         // isCorrect: isCorrect[i * 4 + j] === 'on',
-                        isCorrect:false,
+                        isCorrect: false,
                     });
                 }
             } else if (questionType === 'shortAnswer') {
@@ -85,4 +108,4 @@ const addContactSet = async (req, res) => {
     }
 }
 
-module.exports = {viewContactSetForm, viewContactSet , addContactSet , countQuestionSet};
+module.exports = {viewContactSetForm, viewContactSet, addContactSet, countQuestionSet};
