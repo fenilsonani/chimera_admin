@@ -7,7 +7,8 @@ app.use(express.urlencoded({extended: true}));
 
 const exphbs = require('express-handlebars');
 const customHelpers = require('./helpers/custom-helpers');
-const hbs = require('hbs');
+// const hbs = require('hbs');
+const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 
 
@@ -28,17 +29,22 @@ const path = require('path');
 
 // Set the view engine to use Handlebars (hbs)
 // app.engine('hbs', hbseng.engine);
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 
 
 // Set the views directory to the "views" folder
+const flash = require("connect-flash");
 app.set('views', path.join(__dirname, 'views'));
-
-// Register partials (if needed)
-hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+app.set('layout', 'layouts/layout');
+app.use(expressLayouts);
+app.use(flash());
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Register partials (if needed)
+// hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+
 
 
 // Use express-session middleware
@@ -76,6 +82,12 @@ User.createAdmin();
 const routes = require("./router")
 app.use("/", routes);
 app.get('/', (req, res) => res.send('Hello World!'))
+
+app.all("*", function (req, res) {
+    res.locals = { title: "Error 404" };
+    res.render("auth/auth-404", { layout: "layouts/layout-without-nav" });
+});
+
 
 
 
