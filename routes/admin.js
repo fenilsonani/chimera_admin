@@ -8,8 +8,6 @@ const candidateController = require("../controller/candidateController");
 
 router.get("/" , authController.checkNotAuthenticated ,  AdminController.viewLogin);
 router.get("/dashboard" , authController.checkAuthenticated, AdminController.viewDashboard);
-router.get("/ViewQuestionSetForm" , authController.checkAuthenticated, QuestionSetController.viewContactSetForm);
-router.post("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.addContactSet);
 router.post("/login" ,authController.login);
 
 // candidates
@@ -21,7 +19,10 @@ router.get("/candidates" , authController.checkAuthenticated, candidateControlle
 router.get("/ViewQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewquestionSets);
 router.get("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewQuestionSetForm);
 router.get("/questionSet/:id" , authController.checkAuthenticated, QuestionSetController.viewQuestionSet);
+router.get("/DeletequestionSet/:id" , authController.checkAuthenticated, QuestionSetController.DeleteQuestionSet);
 router.delete("/question/:id" , authController.checkAuthenticated, QuestionSetController.deleteQuestion);
+router.get("/ViewQuestionSetForm" , authController.checkAuthenticated, QuestionSetController.viewQuestionSetForm);
+router.post("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.addQuestionSet);
 
 
 module.exports = router;

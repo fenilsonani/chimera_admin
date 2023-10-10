@@ -26,51 +26,66 @@
                             <span class="text-Bold "> Created On :</span> <span> <%= questionSet.createdAt %></span>
                         </h5>
                         <a href="questionSet/<%= questionSet._id %>" class="btn btn-outline-primary btn-sm">View Details</a>
+                        <a href="DeletequestionSet/<%= questionSet._id %>" class="btn btn-outline-danger btn-sm">Delete</a>
                     </div>
                 </div><!-- end card body -->
             </div><!-- end card -->
         </div>
     <% }); %>
+        <% if (questionSets.length === 0) { %>
+            <div class="col-xl-4 col-md-6">
+                <!-- card -->
+                <div class="card card-animate">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <h5 class="text-uppercase fw-medium text-muted text-truncate mb-0">No Question Sets</h5>
+                            </div>
+                        </div>
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div>
+        <% } %>
 </div>
 
 
-<% questionSets.forEach(function(questionSet) { %>
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title"><%= questionSet.name %></h2>
-            <h5 class="card-title"><%= questionSet.createdAt %></h5>
-            <p>Total Questions: <%= questionSet.totalQuestions %></p>
+<!--<% questionSets.forEach(function(questionSet) { %>-->
+<!--    <div class="card mb-4">-->
+<!--        <div class="card-body">-->
+<!--            <h2 class="card-title"><%= questionSet.name %></h2>-->
+<!--            <h5 class="card-title"><%= questionSet.createdAt %></h5>-->
+<!--            <p>Total Questions: <%= questionSet.totalQuestions %></p>-->
 
 
-            <!--            <ul>-->
-            <!--                <% questionSet.questions.forEach(function(question) { %>-->
-            <!--                    <li>-->
-            <!--                        <%= question.text %>-->
-            <!--                        <% if (question.type) { %>-->
-            <!--                            <ul class="list-group mt-2">-->
-            <!--                                <% question.options.forEach(function(option) { %>-->
-            <!--                                    <li class="list-group-item">-->
-            <!--                                        <%= option.text %>-->
-            <!--                                        <% if (option.isCorrect) { %>-->
-            <!--                                            <span class="badge badge-success ml-2">Correct</span>-->
-            <!--                                        <% } else { %>-->
-            <!--                                            <span class="badge badge-secondary ml-2">Incorrect</span>-->
-            <!--                                        <% } %>-->
-            <!--                                    </li>-->
-            <!--                                <% }); %>-->
-            <!--                            </ul>-->
-            <!--                        <% } %>-->
-            <!--                    </li>-->
-            <!--                    <li class="list-group-item">-->
-            <!--                        <% question.answer.forEach(function(ans) { %>-->
-            <!--                            <%= ans.answer %>-->
-            <!--                        <% }); %>-->
-            <!--                    </li>-->
-            <!--                <% }); %>-->
-            </ul>
-        </div>
-    </div>
-<% }); %>
+<!--            &lt;!&ndash;            <ul>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <% questionSet.questions.forEach(function(question) { %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <%= question.text %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <% if (question.type) { %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                            <ul class="list-group mt-2">&ndash;&gt;-->
+<!--            &lt;!&ndash;                                <% question.options.forEach(function(option) { %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                    <li class="list-group-item">&ndash;&gt;-->
+<!--            &lt;!&ndash;                                        <%= option.text %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                        <% if (option.isCorrect) { %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                            <span class="badge badge-success ml-2">Correct</span>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                        <% } else { %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                            <span class="badge badge-secondary ml-2">Incorrect</span>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                        <% } %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                    </li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                                <% }); %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                            </ul>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <% } %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    </li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    <li class="list-group-item">&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <% question.answer.forEach(function(ans) { %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                            <%= ans.answer %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                        <% }); %>&ndash;&gt;-->
+<!--            &lt;!&ndash;                    </li>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <% }); %>&ndash;&gt;-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--<% }); %>-->
 
 <%- contentFor('FooterJs') %>
 

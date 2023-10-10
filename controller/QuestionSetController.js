@@ -117,7 +117,7 @@ const countQuestionSet = async () => {
     const count = await QuestionSet.countDocuments();
     return count;
 }
-const addContactSet = async (req, res) => {
+const addQuestionSet = async (req, res) => {
     try {
         const {questionSetName, MultipleChoiceQuestion, question, choice, answer} = req.body;
 
@@ -171,7 +171,8 @@ const addContactSet = async (req, res) => {
 
         await questionSet.save();
 
-        res.send('Question Set saved successfully');
+        // console.log('Question Set saved successfully');
+        res.redirect('back');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -205,11 +206,11 @@ const deleteQuestion = async (req, res) => {
 
     try {
         // Step 1: Find the QuestionSet containing the question
-        const questionSet = await QuestionSet.findOne({ questions: questionId });
+        const questionSet = await QuestionSet.findOne({questions: questionId});
 
         if (!questionSet) {
             console.log("QuestionSet not found.");
-            return res.status(200).json({ message: "QuestionSet not found." });
+            return res.status(200).json({message: "QuestionSet not found."});
         }
 
         // Step 2: Remove the reference to the question from the QuestionSet
@@ -225,21 +226,49 @@ const deleteQuestion = async (req, res) => {
         }
 
         console.log("Question deleted successfully.");
-        return res.status(200).json({ message: "Question deleted successfully." });
+        return res.status(200).json({message: "Question deleted successfully."});
     } catch (error) {
         console.error("Error deleting question:", error);
-        return res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({message: "Internal Server Error"});
     }
+}
+
+const DeleteQuestionSet = async (req, res) => {
+    const questionSetId = req.params.id;
+
+    try {
+
+        const questionSet = await QuestionSet.findOne({_id : questionSetId});
+
+        if (!questionSet) {
+            console.log("QuestionSet not found.");
+            res.status(200).send("QuestionSet not found.");
+        }
+
+        questionSet.questions.forEach(async (questionId) => {
+            await Question.findByIdAndDelete(questionId);
+        });
+
+        await questionSet.deleteOne();
+        // console.log("Deleted QuestionSet successfully.");
+        res.redirect('back');
+
+    } catch (error) {
+        console.error("Error deleting question:", error);
+        res.status(500).send("Internal Server Error");
+    }
+
 }
 
 module.exports = {
     viewContactSetForm,
     getAllQuestionSet,
-    addContactSet,
+    addQuestionSet,
     countQuestionSet,
     viewquestionSets,
     viewQuestionSetForm,
     getQuestionSet,
     viewQuestionSet,
     deleteQuestion,
+    DeleteQuestionSet,
 };
