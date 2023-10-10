@@ -10,7 +10,7 @@
         <p>Total Questions: <%= questionSet.totalQuestions %></p>
     </div>
     <% questionSet.questions.forEach(function (question) { %>
-    <div class="col-xl-6 col-md-12">
+    <div class="col-xl-6 col-md-12 card-question">
         <!-- card -->
         <div class="card card-animate">
             <div class="card-header">
@@ -40,6 +40,8 @@
             var questionId = $(this).data('question-id');
             // $('#deleteQuestionId').val(questionId);
 
+            deleteCard = $(this).closest('.card-question');
+
             $.ajax({
                 type: 'DELETE',
                 url: '/admin/question/' + questionId,
@@ -48,6 +50,9 @@
                 },
                 success: function (res) {
                     console.log(res);
+
+
+                    deleteCard.remove();
                 },
             });
         });

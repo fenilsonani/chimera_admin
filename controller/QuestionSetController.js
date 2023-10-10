@@ -209,7 +209,7 @@ const deleteQuestion = async (req, res) => {
 
         if (!questionSet) {
             console.log("QuestionSet not found.");
-            return res.status(200).send("QuestionSet not found.");
+            return res.status(200).json({ message: "QuestionSet not found." });
         }
 
         // Step 2: Remove the reference to the question from the QuestionSet
@@ -220,14 +220,15 @@ const deleteQuestion = async (req, res) => {
         await Question.findByIdAndDelete(questionId);
 
         if (questionSet.questions.length === 0) {
-            await questionSet.findByIdAndDelete(questionSet._id);
+            await QuestionSet.findByIdAndDelete(questionSet._id);
+            console.log("QuestionSet deleted because it has no more questions.");
         }
 
         console.log("Question deleted successfully.");
-        return res.status(200).send("Question deleted successfully.");
+        return res.status(200).json({ message: "Question deleted successfully." });
     } catch (error) {
         console.error("Error deleting question:", error);
-        return res.status(500).send("Internal Server Error");
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
