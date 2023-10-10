@@ -34,5 +34,9 @@ async function addCandidate(req, res) {
         throw error;
     }
 }
+async function  viewCandidates(req, res) {
+    const candidates = await getAllCandidates();
+    res.render('candidates', { title: 'Candidates'  , candidates});
+}
 
-module.exports = {countCandidates, getAllCandidates, addCandidate};
+module.exports = {countCandidates, getAllCandidates, addCandidate , viewCandidates};

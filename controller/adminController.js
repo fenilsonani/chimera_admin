@@ -14,7 +14,7 @@ const viewDashboard = async (req, res) => {
 };
 
 const viewLogin = (req, res) => {
-    res.render('index', { layout: "layouts/layout-without-nav" , title: 'Your Page Title' });
+    res.render('index', { layout: "layouts/layout-without-nav" , title: 'Login' });
 };
 
 
