@@ -172,7 +172,7 @@ const addQuestionSet = async (req, res) => {
         await questionSet.save();
 
         // console.log('Question Set saved successfully');
-        res.redirect('back');
+        res.redirect('/admin/ViewQuestionSet');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
