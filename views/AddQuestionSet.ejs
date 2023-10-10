@@ -1,0 +1,82 @@
+<%- contentFor('HeaderCss') %>
+<style>
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .removeQuestion {
+        margin-top: 10px;
+    }
+</style>
+
+<%- contentFor('body') %>
+<form action="AddQuestionSet" method="post">
+    <!-- Question Set Name -->
+    <div class="form-group">
+        <label for="questionSetName">Question Set Name</label>
+        <input type="text" class="form-control" id="questionSetName" name="questionSetName"
+               placeholder="Enter your question set name">
+    </div>
+
+    <!-- Toggle button to switch between multiple choice and single choice -->
+    <div id="questionSet">
+        <div id="question" class="form-group">
+            <label for="questionType">Multiple Choice</label>
+            <input type="text" id="MultipleChoiceQuestion" name="MultipleChoiceQuestion[]" value="false"
+                   hidden="hidden">
+            <input type="checkbox" id="MultipleChoiceQuestionCheckBox" name="MultipleChoiceQuestionCheckBox">
+
+            <!-- Multiple choice Question -->
+
+            <label for="question">Question 1</label>
+            <input type="text" class="form-control" id="question" name="question[]" placeholder="Enter your question">
+
+            <div id="answerDiv">
+                <label for="answer1">Answer 1</label>
+                <input type="text" class="form-control answer" id="answer" name="answer[]"
+                       placeholder="Enter your answer">
+            </div>
+            <!-- Button to remove question -->
+            <button type="button" class="btn btn-danger removeQuestion">Remove Question</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Button to add new question -->
+    <button type="button" class="btn btn-primary addnewQuestion">Add Question</button>
+    <button type="submit" class="btn btn-primary">Add Question Set</button>
+</form>
+
+<%- contentFor('FooterJs') %>
+<script>
+    $(document).ready(function () {
+        var quetion = $('#questionSet').html();
+
+        $(document).on('change', '#MultipleChoiceQuestionCheckBox', function () {
+            var answerDiv = $(this).parent('#question').children('#answerDiv');
+            answerDiv.children().remove();
+            if ($(this).prop('checked')) {
+                $(this).parent('#question').children('#MultipleChoiceQuestion').val('true');
+                answerDiv.append('<label for="answer1">Choice 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer2">Choice 2</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer3">Choice 3</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer4">Choice 4</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer4">Answer</label><input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">');
+            } else {
+                $(this).parent('#question').children('#MultipleChoiceQuestion').val('false');
+                // answerDiv.append('<label for="answer1">Answer 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+
+                answerDiv.append('<label for="answer1">Answer 1</label><input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">');
+            }
+        });
+
+        $('.addnewQuestion').click(function () {
+            $('#questionSet').append(quetion);
+        })
+
+        $(document).on('click', '.removeQuestion', function () {
+            $(this).parent('#question').remove();
+        });
+    });
+</script>
+

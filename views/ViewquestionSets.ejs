@@ -1,0 +1,76 @@
+<%- contentFor('HeaderCss') %>
+
+<%- contentFor('body') %>
+
+<h3>Question Sets</h3>
+
+<div class="row">
+    <% questionSets.forEach(function(questionSet) { %>
+        <div class="col-xl-4 col-md-6">
+            <!-- card -->
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <h5 class="text-uppercase fw-medium text-muted text-truncate mb-0"><%= questionSet.name %></h5>
+                            <p class="text-bold mb-0"><%= questionSet.totalQuestions %> Questions</p>
+                        </div>
+                        <!--                                        <div class="flex-shrink-0">-->
+                        <!--                                            <h5 class="text-success fs-14 mb-0">-->
+                        <!--                                                <%= questionSet.createdAt %>-->
+                        <!--                                            </h5>-->
+                        <!--                                        </div>-->
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <h5 class="fs-14 mb-0">
+                            <span class="text-Bold "> Created On :</span> <span> <%= questionSet.createdAt %></span>
+                        </h5>
+                        <a href="questionSet/<%= questionSet._id %>" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div><!-- end card body -->
+            </div><!-- end card -->
+        </div>
+    <% }); %>
+</div>
+
+
+<% questionSets.forEach(function(questionSet) { %>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title"><%= questionSet.name %></h2>
+            <h5 class="card-title"><%= questionSet.createdAt %></h5>
+            <p>Total Questions: <%= questionSet.totalQuestions %></p>
+
+
+            <!--            <ul>-->
+            <!--                <% questionSet.questions.forEach(function(question) { %>-->
+            <!--                    <li>-->
+            <!--                        <%= question.text %>-->
+            <!--                        <% if (question.type) { %>-->
+            <!--                            <ul class="list-group mt-2">-->
+            <!--                                <% question.options.forEach(function(option) { %>-->
+            <!--                                    <li class="list-group-item">-->
+            <!--                                        <%= option.text %>-->
+            <!--                                        <% if (option.isCorrect) { %>-->
+            <!--                                            <span class="badge badge-success ml-2">Correct</span>-->
+            <!--                                        <% } else { %>-->
+            <!--                                            <span class="badge badge-secondary ml-2">Incorrect</span>-->
+            <!--                                        <% } %>-->
+            <!--                                    </li>-->
+            <!--                                <% }); %>-->
+            <!--                            </ul>-->
+            <!--                        <% } %>-->
+            <!--                    </li>-->
+            <!--                    <li class="list-group-item">-->
+            <!--                        <% question.answer.forEach(function(ans) { %>-->
+            <!--                            <%= ans.answer %>-->
+            <!--                        <% }); %>-->
+            <!--                    </li>-->
+            <!--                <% }); %>-->
+            </ul>
+        </div>
+    </div>
+<% }); %>
+
+<%- contentFor('FooterJs') %>
+

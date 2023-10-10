@@ -9,13 +9,19 @@ const candidateController = require("../controller/candidateController");
 router.get("/" , authController.checkNotAuthenticated ,  AdminController.viewLogin);
 router.get("/dashboard" , authController.checkAuthenticated, AdminController.viewDashboard);
 router.get("/ViewQuestionSetForm" , authController.checkAuthenticated, QuestionSetController.viewContactSetForm);
-router.get("/ViewQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewContactSet);
 router.post("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.addContactSet);
 router.post("/login" ,authController.login);
 
 // candidates
 
 router.get("/candidates" , authController.checkAuthenticated, candidateController.viewCandidates);
+
+// Question Sets
+
+router.get("/ViewQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewquestionSets);
+router.get("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewQuestionSetForm);
+router.get("/questionSet/:id" , authController.checkAuthenticated, QuestionSetController.viewQuestionSet);
+router.delete("/question/:id" , authController.checkAuthenticated, QuestionSetController.deleteQuestion);
 
 
 module.exports = router;

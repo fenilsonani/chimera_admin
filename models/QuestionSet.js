@@ -28,6 +28,6 @@ const questionSetSchema = new mongoose.Schema({
 });
 
 // Create and export the Question Set model
-const QuestionSet = mongoose.model('QuestionSet', questionSetSchema);
+const QuestionSet = mongoose.model('questionSet', questionSetSchema);
 
 module.exports = QuestionSet;

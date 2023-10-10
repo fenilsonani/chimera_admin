@@ -1,6 +1,8 @@
 // Import QuestionSet model
 const QuestionSet = require('../models/QuestionSet');
 const Question = require('../models/Question');
+const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Types;
 
 const viewContactSetForm = (req, res) => {
     res.render('QuestionSet', {
@@ -8,7 +10,8 @@ const viewContactSetForm = (req, res) => {
     });
 }
 
-const viewContactSet = async (req, res) => {
+
+const getAllQuestionSet = async (req, res) => {
     // try {
     //     const questionSets = await QuestionSet.find().populate('questions');
     //     res.render('ViewQuestionSet', {
@@ -35,14 +38,81 @@ const viewContactSet = async (req, res) => {
                     totalQuestions: {$size: '$questions'}, // Calculate the total number of questions
                 },
             },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    createdAt: {
+                        $dateToString: {
+                            format: '%d-%m-%Y', // Define the desired date format
+                            date: '$createdAt', // Specify the field to format
+                        },
+                    },
+                    totalQuestions: 1,
+                    questions: 1,
+                },
+            },
         ]);
 
-        res.render('ViewQuestionSet', {title: 'View Question Set', questionSets});
+        // res.render('ViewQuestionSet', {title: 'View Question Set', questionSets});
+
+        return questionSets;
+
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        // res.status(500).send('Internal Server Error');
+        throw error;
     }
 }
+
+const getQuestionSet = async (questionSetId) => {
+    try {
+        // Retrieve the specific QuestionSet and associated Questions
+        const questionSetWithQuestions = await QuestionSet.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(questionSetId), // Use mongoose.Types.ObjectId
+                },
+            },
+            {
+                $lookup: {
+                    from: 'questions',
+                    localField: 'questions',
+                    foreignField: '_id',
+                    as: 'questions',
+                },
+            },
+            {
+                $addFields: {
+                    totalQuestions: {$size: '$questions'},
+                },
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    createdAt: {
+                        $dateToString: {
+                            format: '%d-%m-%Y',
+                            date: '$createdAt',
+                        },
+                    },
+                    totalQuestions: 1,
+                    questions: 1,
+                },
+            },
+        ]);
+
+        if (questionSetWithQuestions.length === 0) {
+            return null; // QuestionSet not found
+        }
+        return questionSetWithQuestions[0];
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
 const countQuestionSet = async () => {
     const count = await QuestionSet.countDocuments();
     return count;
@@ -108,4 +178,67 @@ const addContactSet = async (req, res) => {
     }
 }
 
-module.exports = {viewContactSetForm, viewContactSet, addContactSet, countQuestionSet};
+const viewquestionSets = async (req, res) => {
+    const questionSets = await getAllQuestionSet();
+    res.render('ViewquestionSets', {title: 'Question Sets', questionSets});
+}
+
+
+const viewQuestionSet = async (req, res) => {
+    const questionSetId = req.params.id;
+    const questionSet = await getQuestionSet(questionSetId);
+
+    if (questionSet === null) {
+        res.status(404).send('Question Set not found');
+        return;
+    }
+
+    res.render('ViewQuestionSet', {title: 'View Question Set', questionSet});
+}
+const viewQuestionSetForm = (req, res) => {
+    res.render('AddQuestionSet', {title: 'Add Question Set'});
+}
+
+
+const deleteQuestion = async (req, res) => {
+    const questionId = req.params.id;
+
+    try {
+        // Step 1: Find the QuestionSet containing the question
+        const questionSet = await QuestionSet.findOne({ questions: questionId });
+
+        if (!questionSet) {
+            console.log("QuestionSet not found.");
+            return res.status(200).send("QuestionSet not found.");
+        }
+
+        // Step 2: Remove the reference to the question from the QuestionSet
+        questionSet.questions.pull(questionId);
+        await questionSet.save();
+
+        // Step 3: Delete the question itself
+        await Question.findByIdAndDelete(questionId);
+
+        if (questionSet.questions.length === 0) {
+            await questionSet.findByIdAndDelete(questionSet._id);
+        }
+
+        console.log("Question deleted successfully.");
+        return res.status(200).send("Question deleted successfully.");
+    } catch (error) {
+        console.error("Error deleting question:", error);
+        return res.status(500).send("Internal Server Error");
+    }
+}
+
+module.exports = {
+    viewContactSetForm,
+    getAllQuestionSet,
+    addContactSet,
+    countQuestionSet,
+    viewquestionSets,
+    viewQuestionSetForm,
+    getQuestionSet,
+    viewQuestionSet,
+    deleteQuestion,
+};
