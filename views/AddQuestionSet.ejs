@@ -57,10 +57,10 @@
             answerDiv.children().remove();
             if ($(this).prop('checked')) {
                 $(this).parent('#question').children('#MultipleChoiceQuestion').val('true');
-                answerDiv.append('<label for="answer1">Choice 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer2">Choice 2</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer3">Choice 3</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
-                answerDiv.append('<label for="answer4">Choice 4</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your answer">');
+                answerDiv.append('<label for="answer1">Choice 1</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your Choice 1">');
+                answerDiv.append('<label for="answer2">Choice 2</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your Choice 2">');
+                answerDiv.append('<label for="answer3">Choice 3</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your Choice 3">');
+                answerDiv.append('<label for="answer4">Choice 4</label><input type="text" class="form-control answer" id="answer" name="choice[]" placeholder="Enter your Choice 4">');
                 answerDiv.append('<label for="answer4">Answer</label><input type="text" class="form-control answer" id="answer" name="answer[]" placeholder="Enter your answer">');
             } else {
                 $(this).parent('#question').children('#MultipleChoiceQuestion').val('false');
