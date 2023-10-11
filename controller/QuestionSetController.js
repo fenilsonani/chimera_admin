@@ -189,7 +189,7 @@ const viewQuestionSet = async (req, res) => {
     const questionSetId = req.params.id;
     const questionSet = await getQuestionSet(questionSetId);
 
-    if (questionSet === null) {
+    if (!questionSet) {
         res.status(404).send('Question Set not found');
         return;
     }

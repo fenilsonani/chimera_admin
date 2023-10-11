@@ -22,18 +22,21 @@
                     <div class="card-body">
                         <div class="option-div">
                             <% if (question.options.length != 0) { %>
+                                <label>Options:</label>
                                 <% question.options.forEach(function (option){ %>
-                                    <h5> <%= option.text %></h5><br>
+                                    <h5 class="ml-3"> <%= option.text %></h5><br>
                                 <% }) %>
                             <% } %>
                         </div>
                         <div class="answer-div">
+                            <labal>Answer:</labal>
                             <h4> <%= question.answer.answer %></h4>
                         </div>
                     </div><!-- end card -->
                     <div class="card-footer d-flex align-items-end flex-row-reverse justify-content-between mx-2">
-                        <a href="/admin/updateQuestion/<%= question._id %>" class="btn btn-primary btn-sm" data-target="#questionModal"
-                                data-question-id="<%= question._id %>">Update
+                        <a href="/admin/updateQuestion/<%= question._id %>" class="btn btn-primary btn-sm"
+                           data-target="#questionModal"
+                           data-question-id="<%= question._id %>">Update
                         </a>
                         <button class="btn btn-danger btn-sm deleteQuestion" data-toggle="modal"
                                 data-target="#deleteModal"
