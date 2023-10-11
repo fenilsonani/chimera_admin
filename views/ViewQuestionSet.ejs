@@ -1,0 +1,81 @@
+<%- contentFor('HeaderCss') %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<%- contentFor('body') %>
+
+
+<div class="row">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3><%= questionSet.name %> </h3>
+        <p>Total Questions: <%= questionSet.totalQuestions %></p>
+    </div>
+    <div>
+        <% questionSet.questions.forEach(function (question) { %>
+
+            <div class="col-xl-6 col-md-12 card-question">
+                <!-- card -->
+                <div class="card card-animate">
+                    <div class="card-header">
+                        <h2 class="card-title"><%= question.text %></h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="option-div">
+                            <% if (question.options.length != 0) { %>
+                                <label>Options:</label>
+                                <% question.options.forEach(function (option){ %>
+                                    <h5 class="ml-3"> <%= option.text %></h5><br>
+                                <% }) %>
+                            <% } %>
+                        </div>
+                        <div class="answer-div">
+                            <labal>Answer:</labal>
+                            <h4> <%= question.answer.answer %></h4>
+                        </div>
+                    </div><!-- end card -->
+                    <div class="card-footer d-flex align-items-end flex-row-reverse justify-content-between mx-2">
+                        <a href="/admin/updateQuestion/<%= question._id %>" class="btn btn-primary btn-sm"
+                           data-target="#questionModal"
+                           data-question-id="<%= question._id %>">Update
+                        </a>
+                        <button class="btn btn-danger btn-sm deleteQuestion" data-toggle="modal"
+                                data-target="#deleteModal"
+                                data-question-id="<%= question._id %>">Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        <% }); %>
+    </div>
+
+
+    <%- contentFor('FooterJs') %>
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        $('.deleteQuestion').click(function () {
+            var questionId = $(this).data('question-id');
+            // $('#deleteQuestionId').val(questionId);
+
+            deleteCard = $(this).closest('.card-question');
+
+            $.ajax({
+                type: 'DELETE',
+                url: '/admin/question/' + questionId,
+                data: {
+                    _csrf: $('#csrf').val()
+                },
+                success: function (res) {
+                    console.log(res);
+
+
+                    deleteCard.remove();
+                },
+            });
+        });
+
+    </script>

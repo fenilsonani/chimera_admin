@@ -17,7 +17,7 @@ async function getAllCandidates() {
         return candidates;
     } catch (error) {
         console.error(error);
-        throw error;
+        return  res.json({message: "Something Wents Wrong"})
     }
 }
 
@@ -31,8 +31,13 @@ async function addCandidate(req, res) {
         res.send(savedCandidate);
     } catch (error) {
         console.error(error);
-        throw error;
+        // send error msg by json
+        res.status(200).json({message:"Something Wrong"})
     }
 }
+async function  viewCandidates(req, res) {
+    const candidates = await getAllCandidates();
+    res.render('candidates', { title: 'Candidates'  , candidates});
+}
 
-module.exports = {countCandidates, getAllCandidates, addCandidate};
+module.exports = {countCandidates, getAllCandidates, addCandidate , viewCandidates};
