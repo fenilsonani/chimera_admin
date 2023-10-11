@@ -1,0 +1,58 @@
+<%- contentFor('HeaderCss') %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<%- contentFor('body') %>
+<h3 class="mb-4">Update Contact</h3>
+<form action="/admin/updateQuestion" method="post">
+    <input type="hidden" name="id" value="<%= question._id %>">
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="QuestionName" class="form-label">Question</label>
+                        <input type="text" class="form-control" name="question" placeholder="Enter Question" value="<%= question.text %>" id="QuestionName">
+                    </div>
+                </div><!--end col-->
+
+                <% question.options.forEach(function (option , index) { %>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="Choice" class="form-label">Option <%= index+1 %></label>
+                        <input type="text" class="form-control" name="choice" placeholder="Enter Option" value="<%= option.text %>" id="Choice">
+                    </div>
+                </div><!--end col-->
+
+                <% }) %>
+
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="Answer" class="form-label">Answer</label>
+                        <input type="text" class="form-control" name="answer" placeholder="Enter Answer" value="<%= question.answer.answer %>" id="Answer">
+                    </div>
+                </div><!--end col-->
+
+                <!--                <div class="col-6">-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="ForminputState" class="form-label">State</label>-->
+<!--                        <select id="ForminputState" class="form-select">-->
+<!--                            <option selected>Choose...</option>-->
+<!--                            <option>...</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>&lt;!&ndash;end col&ndash;&gt;-->
+                <div class="col-lg-12">
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+    </div>
+</form>
+<%- contentFor('FooterJs') %>
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

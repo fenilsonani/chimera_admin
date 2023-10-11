@@ -161,9 +161,9 @@ const addQuestionSet = async (req, res) => {
 
             }
 
-            newQuestion.answer = [{
+            newQuestion.answer = {
                 answer: answer[i],
-            }];
+            };
 
             await newQuestion.save();
             questionSet.questions.push(newQuestion._id);
@@ -270,12 +270,52 @@ const getApiQuestionSets = async (req, res) => {
     }
 }
 
-const updateQuestion = async (req, res) => {
+const updateQuestionPage = async (req, res) => {
     questionid = req.params.id
     try {
-        question = await question.find(updateQuestion)
+        question = await Question.findById(questionid)
+        res.render('updateQuestion', {title: 'Update Question', question})
     } catch (error) {
+        console.error(error);
+        res.redirect('back').json({message: "Something Wents Wrong"})
+    }
+}
 
+const updateQuestion = async (req, res) => {
+try {
+        const {id , question, choice, answer} = req.body;
+        const questionid = req.body.id;
+        const questionSet = await QuestionSet.findOne({questions: questionid});
+
+        if (!questionSet) {
+            console.log("QuestionSet not found.");
+            return res.status(200).json({message: "QuestionSet not found."});
+        }
+
+        const newQuestion = await Question.findById(questionid);
+        newQuestion.text = question;
+        newQuestion.options = [];
+        newQuestion.answer;
+
+        if (choice){
+            for (i=0 ; i<4 ; i++){
+                newQuestion.options.push({
+                    text: choice[i],
+                    // isCorrect: isCorrect[i] === 'on',
+                    isCorrect: false,
+                });
+            }
+        }
+
+        newQuestion.answer = {
+            answer: answer,
+        };
+
+        await newQuestion.save();
+        res.redirect('/admin/ViewQuestionSet');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
 }
 module.exports = {
@@ -290,5 +330,6 @@ module.exports = {
     viewQuestionSet,
     deleteQuestion,
     DeleteQuestionSet,
+    updateQuestionPage,
     updateQuestion
 };
