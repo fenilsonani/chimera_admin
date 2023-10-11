@@ -238,7 +238,7 @@ const DeleteQuestionSet = async (req, res) => {
 
     try {
 
-        const questionSet = await QuestionSet.findOne({_id : questionSetId});
+        const questionSet = await QuestionSet.findOne({_id: questionSetId});
 
         if (!questionSet) {
             console.log("QuestionSet not found.");
@@ -260,7 +260,7 @@ const DeleteQuestionSet = async (req, res) => {
 
 }
 
-const  getApiQuestionSets = async (req, res) => {
+const getApiQuestionSets = async (req, res) => {
     try {
         const questionSets = await getAllQuestionSet();
         res.status(200).json(questionSets);
@@ -270,6 +270,14 @@ const  getApiQuestionSets = async (req, res) => {
     }
 }
 
+const updateQuestion = async (req, res) => {
+    questionid = req.params.id
+    try {
+        question = await question.find(updateQuestion)
+    } catch (error) {
+
+    }
+}
 module.exports = {
     viewContactSetForm,
     getAllQuestionSet,
@@ -282,4 +290,5 @@ module.exports = {
     viewQuestionSet,
     deleteQuestion,
     DeleteQuestionSet,
+    updateQuestion
 };

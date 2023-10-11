@@ -1,6 +1,5 @@
 <%- contentFor('HeaderCss') %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" integrity="sha512-888I2nScRzrb/WNZ3qsa5kiZNmaEsvz8HEVQZRGokIEOj/sMnUlLClqP7itKJYDhXWsmp+1usxoCidSEfW2rWw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.min.css" integrity="sha512-pZqJY6O1CmsoNXFQzpxc+DqTjVjZksnizgykkLSjj2FeM/KzZyVpy4E1FtX90FoU2Ka8X/nlo/7ebheSThd4Qg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <%- contentFor('body') %>
 
@@ -33,9 +32,9 @@
                         </div>
                     </div><!-- end card -->
                     <div class="card-footer d-flex align-items-end flex-row-reverse justify-content-between mx-2">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#questionModal"
+                        <a href="/admin/updateQuestion/<%= question._id %>" class="btn btn-primary btn-sm" data-target="#questionModal"
                                 data-question-id="<%= question._id %>">Update
-                        </button>
+                        </a>
                         <button class="btn btn-danger btn-sm deleteQuestion" data-toggle="modal"
                                 data-target="#deleteModal"
                                 data-question-id="<%= question._id %>">Delete
@@ -48,83 +47,11 @@
     </div>
 
 
-    <!--    modal for update  questionModal -->
-    <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModal" style="display: none;"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="questionModal">Grid Modals</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="javascript:void(0);">
-                        <div class="row g-3">
-                            <div class="col-xxl-6">
-                                <div>
-                                    <label for="firstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstName"
-                                           placeholder="Enter firstname">
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-xxl-6">
-                                <div>
-                                    <label for="lastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="Enter lastname">
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <label class="form-label">Gender</label>
-                                <div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                               id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                               id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                               id="inlineRadio3" value="option3">
-                                        <label class="form-check-label" for="inlineRadio3">Others</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end col-->
-                            <div class="col-xxl-6">
-                                <label for="emailInput" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="emailInput" placeholder="Enter your email">
-                            </div>
-                            <!--end col-->
-                            <div class="col-xxl-6">
-                                <label for="passwordInput" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="passwordInput" value="451326546"
-                                       placeholder="Enter password">
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--    modal close-->
-
     <%- contentFor('FooterJs') %>
-
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script>
         $('.deleteQuestion').click(function () {

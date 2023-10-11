@@ -22,6 +22,7 @@ router.get("/questionSet/:id" , authController.checkAuthenticated, QuestionSetCo
 router.get("/DeletequestionSet/:id" , authController.checkAuthenticated, QuestionSetController.DeleteQuestionSet);
 router.delete("/question/:id" , authController.checkAuthenticated, QuestionSetController.deleteQuestion);
 router.get("/ViewQuestionSetForm" , authController.checkAuthenticated, QuestionSetController.viewQuestionSetForm);
+router.get("/updateQuestion/:id" , authController.checkAuthenticated, QuestionSetController.updateQuestion);
 router.post("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.addQuestionSet);
 
 
