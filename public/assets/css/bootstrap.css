@@ -45,7 +45,7 @@ File: Custom Bootstrap Css File
   --vz-danger: #f06548;
   --vz-light: #f3f6f9;
   --vz-dark: #212529;
-  --vz-primary-rgb: 64, 81, 137;
+  --vz-primary-rgb: 65, 65, 65;
   --vz-secondary-rgb: 53, 119, 241;
   --vz-success-rgb: 10, 179, 156;
   --vz-info-rgb: 41, 156, 219;
@@ -102,10 +102,10 @@ File: Custom Bootstrap Css File
   --vz-tertiary-bg-rgb: 239, 242, 247;
   --vz-heading-color: #495057;
   --vz-link-color: #405189;
-  --vz-link-color-rgb: 64, 81, 137;
+  --vz-link-color-rgb: 65, 65, 65;
   --vz-link-decoration: none;
   --vz-link-hover-color: #405189;
-  --vz-link-hover-color-rgb: 64, 81, 137;
+  --vz-link-hover-color-rgb: 65, 65, 65;
   --vz-code-color: #f672a7;
   --vz-highlight-bg: #fcf8e3;
   --vz-border-width: 1px;
@@ -155,7 +155,7 @@ File: Custom Bootstrap Css File
   --vz-danger-text-emphasis: #f3846d;
   --vz-light-text-emphasis: #535659;
   --vz-dark-text-emphasis: #5f6164;
-  --vz-primary-bg-subtle: rgba(64, 81, 137, 0.15);
+  --vz-primary-bg-subtle: rgba(65, 65, 65, 0.15);
   --vz-secondary-bg-subtle: rgba(53, 119, 241, 0.15);
   --vz-success-bg-subtle: rgba(10, 179, 156, 0.15);
   --vz-info-bg-subtle: rgba(41, 156, 219, 0.15);
@@ -2582,7 +2582,7 @@ textarea.form-control-lg {
   --vz-btn-hover-color: #fff;
   --vz-btn-hover-bg: #405189;
   --vz-btn-hover-border-color: #405189;
-  --vz-btn-focus-shadow-rgb: 64, 81, 137;
+  --vz-btn-focus-shadow-rgb: 65, 65, 65;
   --vz-btn-active-color: #fff;
   --vz-btn-active-bg: #405189;
   --vz-btn-active-border-color: #405189;
@@ -5593,7 +5593,7 @@ textarea.form-control-lg {
 
 .text-bg-primary {
   color: #fff !important;
-  background-color: RGBA(64, 81, 137, var(--vz-bg-opacity, 1)) !important; }
+  background-color: RGBA(65, 65, 65, var(--vz-bg-opacity, 1)) !important; }
 
 .text-bg-secondary {
   color: #fff !important;
