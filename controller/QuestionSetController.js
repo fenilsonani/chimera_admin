@@ -260,9 +260,20 @@ const DeleteQuestionSet = async (req, res) => {
 
 }
 
+const  getApiQuestionSets = async (req, res) => {
+    try {
+        const questionSets = await getAllQuestionSet();
+        res.status(200).json(questionSets);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 module.exports = {
     viewContactSetForm,
     getAllQuestionSet,
+    getApiQuestionSets,
     addQuestionSet,
     countQuestionSet,
     viewquestionSets,

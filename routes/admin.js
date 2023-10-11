@@ -25,4 +25,8 @@ router.get("/ViewQuestionSetForm" , authController.checkAuthenticated, QuestionS
 router.post("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.addQuestionSet);
 
 
+// for api to get question
+router.get("/AllquestionSet" , QuestionSetController.getApiQuestionSets);
+
+
 module.exports = router;
