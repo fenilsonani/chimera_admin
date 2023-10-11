@@ -1,8 +1,9 @@
 const express = require('express');
 const session = require('express-session');
-const port = process.env.PORT | 4444
+const port = process.env.PORT | 3000;
 const app = express();
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({extended: true}));
 
@@ -13,19 +14,6 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 
 
-
-// Register a Handlebars helper function to increment the index
-// const hbseng = exphbs.create({
-//     extname: 'hbs',
-//     helpers: {
-//         // Define the incrementIndex helper function
-//         incrementIndex: function (value) {
-//             return value + 1;
-//         },
-//     },
-//     allowProtoMethodsByDefault: true,
-//     allowProtoPropertiesByDefault: true
-// });
 
 
 // Set the view engine to use Handlebars (hbs)
@@ -39,6 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(flash());
+app.use(cors());
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -90,9 +79,3 @@ app.all("*", function (req, res) {
     res.locals = { title: "Error 404" };
     res.render("auth/auth-404", { layout: "layouts/layout-without-nav" });
 });
-
-
-
-
-
-
