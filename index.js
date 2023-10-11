@@ -1,7 +1,8 @@
 const express = require('express');
 const session = require('express-session');
-const port = process.env.PORT | 3000
+const port = process.env.PORT | 4444
 const app = express();
+const bcrypt = require('bcrypt');
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({extended: true}));
 
@@ -58,8 +59,10 @@ app.use(session({
 
 // mongoes connect
 const mongoose = require('mongoose');
+
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb://localhost:27017/db_chimera", {
+
+mongoose.connect("mongodb+srv://21bmiit160:B3V5eIksCshehnIl@cluster0.s5kvifg.mongodb.net", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4
