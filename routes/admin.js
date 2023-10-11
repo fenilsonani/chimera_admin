@@ -3,7 +3,7 @@ const router = express.Router();
 
 const AdminController = require("../controller/adminController");
 const authController = require("../controller/authController");
-const QuestionSetController = require("../controller/questionSetController");
+const QuestionSetController = require("../controller/QuestionSetController");
 const candidateController = require("../controller/candidateController");
 
 router.get("/" , authController.checkNotAuthenticated ,  AdminController.viewLogin);

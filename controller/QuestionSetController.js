@@ -1,6 +1,6 @@
 // Import QuestionSet model
 const QuestionSet = require('../models/QuestionSet');
-const Question = require('../models/Question');
+const Question = require('../models/question');
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types;
 
