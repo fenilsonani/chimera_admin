@@ -15,10 +15,10 @@ const questionSchema = new mongoose.Schema({
         text: String,
         isCorrect: Boolean,
     }],
-    answer: [{
+    answer: {
         answer: String,
         // isCorrect: Boolean,
-    }],
+    },
 });
 
 // Create and export the Question model
