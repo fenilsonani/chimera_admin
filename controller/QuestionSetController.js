@@ -121,6 +121,24 @@ const addQuestionSet = async (req, res) => {
     try {
         const {questionSetName, MultipleChoiceQuestion, question, choice, answer} = req.body;
 
+        // create temp array
+        const temp = [];
+        let startIndex = 0;
+
+        for (let i = 0; i < MultipleChoiceQuestion.length; i++) {
+            if (MultipleChoiceQuestion[i] === 'true') {
+                temp.push(choice.slice(startIndex, startIndex + 4));
+                startIndex += 4;
+            } else {
+                temp.push([null]);
+                // startIndex++;
+            }
+        }
+
+        // actual adding of question
+
+        console.log(req.body)
+        console.log(temp)
         const questionSet = new QuestionSet({
             name: questionSetName,
         });
@@ -147,7 +165,7 @@ const addQuestionSet = async (req, res) => {
 
                 for (let j = 0; j < 4; j++) {
                     newQuestion.options.push({
-                        text: choice[i * 4 + j],
+                        text: temp[i][j],
                         // isCorrect: isCorrect[i * 4 + j] === 'on',
                         isCorrect: false,
                     });
