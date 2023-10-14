@@ -16,15 +16,15 @@ router.get("/candidates" , authController.checkAuthenticated, candidateControlle
 
 // Question Sets
 
-router.get("/ViewQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewquestionSets);
-router.get("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.viewQuestionSetForm);
-router.get("/questionSet/:id" , authController.checkAuthenticated, QuestionSetController.viewQuestionSet);
-router.get("/DeletequestionSet/:id" , authController.checkAuthenticated, QuestionSetController.DeleteQuestionSet);
-router.delete("/question/:id" , authController.checkAuthenticated, QuestionSetController.deleteQuestion);
-router.get("/ViewQuestionSetForm" , authController.checkAuthenticated, QuestionSetController.viewQuestionSetForm);
-router.get("/updateQuestion/:id" , authController.checkAuthenticated, QuestionSetController.updateQuestionPage);
-router.post("/AddQuestionSet" , authController.checkAuthenticated, QuestionSetController.addQuestionSet);
-router.post('/updateQuestion' , authController.checkAuthenticated, QuestionSetController.updateQuestion);
+router.get("/ViewQuestionSet" , QuestionSetController.viewquestionSets);
+router.get("/AddQuestionSet", QuestionSetController.viewQuestionSetForm);
+router.get("/questionSet/:id" , QuestionSetController.viewQuestionSet);
+router.get("/DeletequestionSet/:id" , QuestionSetController.DeleteQuestionSet);
+router.delete("/question/:id" , QuestionSetController.deleteQuestion);
+router.get("/ViewQuestionSetForm" , QuestionSetController.viewQuestionSetForm);
+router.get("/updateQuestion/:id" , QuestionSetController.updateQuestionPage);
+router.post("/AddQuestionSet" , QuestionSetController.addQuestionSet);
+router.post('/updateQuestion', QuestionSetController.updateQuestion);
 
 
 // for api to get question
