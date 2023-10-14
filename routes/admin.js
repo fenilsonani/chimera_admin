@@ -12,7 +12,7 @@ router.post("/login" ,authController.login);
 
 // candidates
 
-router.get("/candidates" , authController.checkAuthenticated, candidateController.viewCandidates);
+router.get("/candidates" , candidateController.viewCandidates);
 
 // Question Sets
 
